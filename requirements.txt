@@ -1,0 +1,7 @@
+requests
+pandas
+Pillow
+arabic-reshaper
+python-bidi
+openpyxl
+pytz
