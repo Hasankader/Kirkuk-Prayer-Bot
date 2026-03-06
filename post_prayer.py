@@ -3,13 +3,15 @@ import pandas as pd
 import datetime
 import time
 import pytz
+import os
 from PIL import Image, ImageDraw, ImageFont
 import arabic_reshaper
 from bidi.algorithm import get_display
 
 # 1. معلومات صفحتك (الرمز الدائم)
 PAGE_ID = '261762917029378'
-ACCESS_TOKEN = 'EABAcvzlSGwoBQ238zdkpH7rfcn1ZC0zAhc7vmZA2ngn9IWNS3WQrbtkj9DXYuFWh1b0HNwIYvodDAGY0T0LpHFIrk1xuMw8ChSE5mkjGw3dbgnGk69QPE2nn6rb7ltY9bo5MZC9E2QnnxFZC6wvO1Sb7v9C2vZCaNVPUmkHkmSQQrppXXejIxUMpdNv5wmXyZBy8snFvUrywlURfqSDQvsNJYZD'
+ACCESS_TOKEN = 
+os.environ.get('FB_ACCESS_TOKEN')
 
 ARABIC_DAYS = {
     'Sunday': 'الأحد', 'Monday': 'الاثنين', 'Tuesday': 'الثلاثاء',
@@ -173,3 +175,4 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
