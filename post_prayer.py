@@ -126,11 +126,10 @@ try:
             if not tomorrow_data.empty:
                 t = tomorrow_data.iloc[0]
                 day_ar = ARABIC_DAYS.get(tomorrow_date.strftime('%A'), '')
-                raw_date_text = f"{day_ar} {tomorrow_date}"
-                fixed_date_text = fix_arabic_text(raw_date_text)
+                only_date_text = str(tomorrow_date)
                 
                 img_path = create_schedule_image(
-                    fixed_date_text, clean_t(t['Fajr']), clean_t(t['Sunrise']), 
+                    only_date_text, clean_t(t['Fajr']), clean_t(t['Sunrise']), 
                     clean_t(t['Dhuhr']), clean_t(t['Asr']), clean_t(t['Maghrib']), clean_t(t['Isha'])
                 )
                 if img_path:
@@ -174,5 +173,6 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
