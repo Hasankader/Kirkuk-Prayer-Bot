@@ -10,8 +10,7 @@ from bidi.algorithm import get_display
 
 # 1. معلومات صفحتك (الرمز الدائم)
 PAGE_ID = '261762917029378'
-ACCESS_TOKEN = 
-os.environ.get('FB_ACCESS_TOKEN')
+ACCESS_TOKEN = os.environ.get('FB_ACCESS_TOKEN')
 
 ARABIC_DAYS = {
     'Sunday': 'الأحد', 'Monday': 'الاثنين', 'Tuesday': 'الثلاثاء',
@@ -175,4 +174,5 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
