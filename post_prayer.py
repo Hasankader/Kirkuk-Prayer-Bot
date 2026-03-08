@@ -114,7 +114,7 @@ try:
         # =========================================================
     # 1. نشر جدول يوم غد (الساعة 9:00 مساءً بالدقيقة)
     # =========================================================
-    target_time_str = "09:00 PM"
+    target_time_str = "08:33 PM"
     target_time_obj = datetime.datetime.strptime(target_time_str, "%I:%M %p").time()
     target_dt = iraq_tz.localize(datetime.datetime.combine(today_date, target_time_obj))
     
@@ -180,6 +180,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
