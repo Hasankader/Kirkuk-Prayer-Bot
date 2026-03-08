@@ -74,7 +74,14 @@ def create_schedule_image(date_str, fajr, sunrise, dhuhr, asr, maghrib, isha):
 
         color = (255, 255, 255) 
         x = 280 
-        draw.text((x - 150, 250), date_str, font=font, fill=color)
+        
+        # استخراج عرض الصورة حتى نخلي التاريخ بالسنتر
+        W = img.width
+        
+        # رسم التاريخ بالمنتصف
+        draw.text((W / 2, 250), date_str, font=font, fill=color, anchor="mm")
+        
+        # باقي الأوقات تبقى بمكانها
         draw.text((x, 350), fajr, font=font, fill=color)
         draw.text((x, 450), sunrise, font=font, fill=color)
         draw.text((x, 550), dhuhr, font=font, fill=color)
@@ -173,6 +180,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
