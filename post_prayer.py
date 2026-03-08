@@ -76,7 +76,7 @@ def create_schedule_image(date_str, fajr, sunrise, dhuhr, asr, maghrib, isha):
         x = 280 
         
         # هنا بقينا الارتفاع 250 (نفس المستوى)، بس دفعنا التاريخ لليمين (سويناه 200 بدال 130)
-        draw.text((200, 250), date_str, font=font, fill=color)
+        draw.text((250, 250), date_str, font=font, fill=color)
         
         # باقي أوقات الصلاة بقت بمكانها القديم بالضبط
         draw.text((x, 350), fajr, font=font, fill=color)
@@ -111,7 +111,7 @@ try:
         # =========================================================
     # 1. نشر جدول يوم غد (الساعة 9:00 مساءً بالدقيقة)
     # =========================================================
-    target_time_str = "08:38 PM"
+    target_time_str = "08:42 PM"
     target_time_obj = datetime.datetime.strptime(target_time_str, "%I:%M %p").time()
     target_dt = iraq_tz.localize(datetime.datetime.combine(today_date, target_time_obj))
     
@@ -177,6 +177,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
