@@ -61,19 +61,34 @@ def post_to_facebook(caption, image_path):
     except Exception as e:
         print(f" خطأ بالنشر: {e}")
 def post_to_story(image_path):
-    # لاحظ اكو مسافة فارغة هنا قبل الـ url وباقي الأسطر
-    url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photo_stories"
-    payload = {'access_token': ACCESS_TOKEN}
+    # الخطوة 1: نرفع الصورة لفيسبوك كـ "مخفية" حتى نحصل على الـ (ID) مالتها
+    upload_url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photos"
+    upload_payload = {'published': 'false', 'access_token': ACCESS_TOKEN}
+    
     try:
         with open(image_path, 'rb') as img:
             files = {'source': img}
-            response = requests.post(url, data=payload, files=files)
-            if response.status_code == 200:
-                print("✅ تم نشر الجدول في القصة (الستوري) بنجاح!")
+            print(" جاري تحضير الصورة للقصة...")
+            upload_response = requests.post(upload_url, data=upload_payload, files=files)
+            
+            if upload_response.status_code == 200:
+                # إذا انرفعت بنجاح، ناخذ الـ ID مال الصورة
+                photo_id = upload_response.json().get('id')
+                
+                # الخطوة 2: نستخدم الـ ID حتى ننشر الصورة كقصة (ستوري)
+                story_url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photo_stories"
+                story_payload = {'photo_id': photo_id, 'access_token': ACCESS_TOKEN}
+                
+                story_response = requests.post(story_url, data=story_payload)
+                if story_response.status_code == 200:
+                    print(" تم نشر الجدول في القصة (الستوري) بنجاح!")
+                else:
+                    print(f" خطأ من فيسبوك أثناء وضع الصورة بالقصة: {story_response.json()}")
             else:
-                print(f"❌ خطأ من فيسبوك أثناء نشر القصة: {response.json()}")
+                print(f" خطأ برفع الصورة للقصة: {upload_response.json()}")
+                
     except Exception as e:
-        print(f"❌ خطأ بالنشر في القصة: {e}")
+        print(f" خطأ بالنشر في القصة: {e}")
 
 def create_schedule_image(date_str, fajr, sunrise, dhuhr, asr, maghrib, isha):
     template_path = 'template.jpg' 
@@ -192,6 +207,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
