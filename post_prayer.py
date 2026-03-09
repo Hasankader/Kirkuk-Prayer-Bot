@@ -61,10 +61,10 @@ def post_to_facebook(caption, image_path):
     except Exception as e:
         print(f" خطأ بالنشر: {e}")
         def post_to_story(image_path):
-    # رابط فيسبوك المخصص للستوري (يختلف عن المنشور العادي)
-        url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photo_stories"
-        payload = {'access_token': ACCESS_TOKEN}
-        try:
+    # لاحظ اكو مسافة فارغة هنا قبل الـ url وباقي الأسطر
+    url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photo_stories"
+    payload = {'access_token': ACCESS_TOKEN}
+    try:
         with open(image_path, 'rb') as img:
             files = {'source': img}
             response = requests.post(url, data=payload, files=files)
@@ -192,6 +192,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
