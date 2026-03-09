@@ -60,6 +60,20 @@ def post_to_facebook(caption, image_path):
                 print(f" خطأ من فيسبوك: {response.json()}")
     except Exception as e:
         print(f" خطأ بالنشر: {e}")
+        def post_to_story(image_path):
+    # رابط فيسبوك المخصص للستوري (يختلف عن المنشور العادي)
+    url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photo_stories"
+    payload = {'access_token': ACCESS_TOKEN}
+    try:
+        with open(image_path, 'rb') as img:
+            files = {'source': img}
+            response = requests.post(url, data=payload, files=files)
+            if response.status_code == 200:
+                print("✅ تم نشر الجدول في القصة (الستوري) بنجاح!")
+            else:
+                print(f"❌ خطأ من فيسبوك أثناء نشر القصة: {response.json()}")
+    except Exception as e:
+        print(f"❌ خطأ بالنشر في القصة: {e}")
 
 def create_schedule_image(date_str, fajr, sunrise, dhuhr, asr, maghrib, isha):
     template_path = 'template.jpg' 
@@ -140,6 +154,7 @@ try:
                     caption = f" مواقيت الصلاة ليوم غدٍ {day_ar} لمدينة كركوك الحبيبة.\nتقبل الله طاعاتكم "
                     print(" حان وقت نشر الجدول الآن!")
                     post_to_facebook(caption, img_path)
+                    post_to_story(img_path)  # <--- هذا السطر الجديد، يرفع نفس الصورة للستوري
 
     # =========================================================
     # 2. نشر الأذان المفرد (بالدقيقة والثانية)
@@ -177,6 +192,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
