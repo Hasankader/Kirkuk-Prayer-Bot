@@ -60,7 +60,7 @@ def post_to_facebook(caption, image_path):
                 print(f" خطأ من فيسبوك: {response.json()}")
     except Exception as e:
         print(f" خطأ بالنشر: {e}")
-        def post_to_story(image_path):
+def post_to_story(image_path):
     # لاحظ اكو مسافة فارغة هنا قبل الـ url وباقي الأسطر
     url = f"https://graph.facebook.com/v19.0/{PAGE_ID}/photo_stories"
     payload = {'access_token': ACCESS_TOKEN}
@@ -192,6 +192,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
