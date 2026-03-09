@@ -107,7 +107,7 @@ try:
     today_data = df[df[date_col] == today_date]
     tomorrow_data = df[df[date_col] == tomorrow_date]
 
-    def clean_t(val): return str(val).split(' ')[-1][:5]
+    def clean_t(val): return str(val).split(' ')[0][:5]
         # =========================================================
     # 1. نشر جدول يوم غد (الساعة 9:00 مساءً بالدقيقة)
     # =========================================================
@@ -177,6 +177,7 @@ try:
 
 except Exception as e:
     print(f" خطأ: {e}")
+
 
 
 
